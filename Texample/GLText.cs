@@ -99,7 +99,7 @@ namespace Texample
         //    file - Filename of the font (.ttf, .otf) to use. In 'Assets' folder.
         //    size - Requested pixel size of font (height)
         //    padX, padY - Extra padding per character (X+Y Axis); to prevent overlapping characters.
-        public bool load(String file, int size, int padX, int padY) {
+        public bool Load(String file, int size, int padX, int padY) {
             // setup requested values
             fontPadX = padX;                                // Set Requested X Axis Padding
             fontPadY = padY;                                // Set Requested Y Axis Padding
@@ -230,19 +230,19 @@ namespace Texample
         // A: red, green, blue - RGB values for font (default = 1.0)
         //    alpha - optional alpha value for font (default = 1.0)
         // R: [none]
-        public void begin() {
-            begin(1.0f, 1.0f, 1.0f, 1.0f);                // Begin with White Opaque
+        public void Begin() {
+            Begin(1.0f, 1.0f, 1.0f, 1.0f);                // Begin with White Opaque
         }
-        public void begin(float alpha) {
-            begin(1.0f, 1.0f, 1.0f, alpha);               // Begin with White (Explicit Alpha)
+        public void Begin(float alpha) {
+            Begin(1.0f, 1.0f, 1.0f, alpha);               // Begin with White (Explicit Alpha)
         }
-        public void begin(float red, float green, float blue, float alpha) {
+        public void Begin(float red, float green, float blue, float alpha) {
             GL.Color4(red, green, blue, alpha);        // Set Color+Alpha
             GL.BindTexture(All.Texture2D, textureId);  // Bind the Texture
-            batch.beginBatch();                             // Begin Batch
+            batch.BeginBatch();                             // Begin Batch
         }
-        public void end() {
-            batch.endBatch();                               // End Batch
+        public void End() {
+            batch.EndBatch();                               // End Batch
             GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);         // Restore Default Color/Alpha
         }
 
@@ -251,7 +251,7 @@ namespace Texample
         // A: text - the string to draw
         //    x, y - the x,y position to draw text at (bottom left of text; including descent)
         // R: [none]
-        public void draw(String text, float x, float y) {
+        public void Draw(string text, float x, float y) {
             float chrHeight = cellHeight * scaleY;          // Calculate Scaled Character Height
             float chrWidth = cellWidth * scaleX;            // Calculate Scaled Character Width
             int len = text.Length;                        // Get String Length
@@ -261,7 +261,7 @@ namespace Texample
                 int c = (int)text[i] - CHAR_START;  // Calculate Character Index (Offset by First Char in Font)
                 if (c < 0 || c >= CHAR_CNT)                // IF Character Not In Font
                     c = CHAR_UNKNOWN;                         // Set to Unknown Character Index
-                batch.drawSprite(x, y, chrWidth, chrHeight, charRgn[c]);  // Draw the Character
+                batch.DrawSprite(x, y, chrWidth, chrHeight, charRgn[c]);  // Draw the Character
                 x += (charWidths[c] + spaceX) * scaleX;    // Advance X Position by Scaled Character Width
             }
         }
@@ -271,18 +271,18 @@ namespace Texample
         // A: text - the string to draw
         //    x, y - the x,y position to draw text at (bottom left of text)
         // R: the total width of the text that was drawn
-        public float drawC(String text, float x, float y) {
-            float len = getLength(text);                  // Get Text Length
-            draw(text, x - (len / 2.0f), y - (getCharHeight() / 2.0f));  // Draw Text Centered
+        public float DrawC(String text, float x, float y) {
+            float len = GetLength(text);                  // Get Text Length
+            Draw(text, x - (len / 2.0f), y - (GetCharHeight() / 2.0f));  // Draw Text Centered
             return len;                                     // Return Length
         }
-        public float drawCX(String text, float x, float y) {
-            float len = getLength(text);                  // Get Text Length
-            draw(text, x - (len / 2.0f), y);            // Draw Text Centered (X-Axis Only)
+        public float DrawCX(String text, float x, float y) {
+            float len = GetLength(text);                  // Get Text Length
+            Draw(text, x - (len / 2.0f), y);            // Draw Text Centered (X-Axis Only)
             return len;                                     // Return Length
         }
-        public void drawCY(String text, float x, float y) {
-            draw(text, x, y - (getCharHeight() / 2.0f));  // Draw Text Centered (Y-Axis Only)
+        public void DrawCY(String text, float x, float y) {
+            Draw(text, x, y - (GetCharHeight() / 2.0f));  // Draw Text Centered (Y-Axis Only)
         }
 
         //--Set Scale--//
@@ -290,10 +290,10 @@ namespace Texample
         // A: scale - uniform scale for both x and y axis scaling
         //    sx, sy - separate x and y axis scaling factors
         // R: [none]
-        public void setScale(float scale) {
+        public void SetScale(float scale) {
             scaleX = scaleY = scale;                        // Set Uniform Scale
         }
-        public void setScale(float sx, float sy) {
+        public void SetScale(float sx, float sy) {
             scaleX = sx;                                    // Set X Scale
             scaleY = sy;                                    // Set Y Scale
         }
@@ -302,10 +302,10 @@ namespace Texample
         // D: get the current scaling used for the font
         // A: [none]
         // R: the x/y scale currently used for scale
-        public float getScaleX() {
+        public float GetScaleX() {
             return scaleX;                                  // Return X Scale
         }
-        public float getScaleY() {
+        public float GetScaleY() {
             return scaleY;                                  // Return Y Scale
         }
 
@@ -313,7 +313,7 @@ namespace Texample
         // D: set the spacing (unscaled; ie. pixel size) to use for the font
         // A: space - space for x axis spacing
         // R: [none]
-        public void setSpace(float space) {
+        public void SetSpace(float space) {
             spaceX = space;                                 // Set Space
         }
 
@@ -321,7 +321,7 @@ namespace Texample
         // D: get the current spacing used for the font
         // A: [none]
         // R: the x/y space currently used for scale
-        public float getSpace() {
+        public float GetSpace() {
             return spaceX;                                  // Return X Space
         }
 
@@ -329,7 +329,7 @@ namespace Texample
         // D: return the length of the specified string if rendered using current settings
         // A: text - the string to get length for
         // R: the length of the specified string (pixels)
-        public float getLength(String text) {
+        public float GetLength(String text) {
             float len = 0.0f;                               // Working Length
             int strLen = text.Length;                     // Get String Length (Characters)
             for (int i = 0; i < strLen; i++) {           // For Each Character in String (Except Last
@@ -346,14 +346,14 @@ namespace Texample
         //    NOTE: excludes spacing!!
         // A: chr - the character to get width for
         // R: the requested character size (scaled)
-        public float getCharWidth(char chr) {
+        public float GetCharWidth(char chr) {
             int c = chr - CHAR_START;                       // Calculate Character Index (Offset by First Char in Font)
             return (charWidths[c] * scaleX);              // Return Scaled Character Width
         }
-        public float getCharWidthMax() {
+        public float GetCharWidthMax() {
             return (charWidthMax * scaleX);               // Return Scaled Max Character Width
         }
-        public float getCharHeight() {
+        public float GetCharHeight() {
             return (charHeight * scaleY);                 // Return Scaled Character Height
         }
 
@@ -361,13 +361,13 @@ namespace Texample
         // D: return the specified (scaled) font metric
         // A: [none]
         // R: the requested font metric (scaled)
-        public float getAscent() {
+        public float GetAscent() {
             return (fontAscent * scaleY);                 // Return Font Ascent
         }
-        public float getDescent() {
+        public float GetDescent() {
             return (fontDescent * scaleY);                // Return Font Descent
         }
-        public float getHeight() {
+        public float GetHeight() {
             return (fontHeight * scaleY);                 // Return Font Height (Actual)
         }
 
@@ -375,10 +375,10 @@ namespace Texample
         // D: draw the entire font texture (NOTE: for testing purposes only)
         // A: width, height - the width and height of the area to draw to. this is used
         //    to draw the texture to the top-left corner.
-        public void drawTexture(int width, int height) {
-            batch.beginBatch(textureId);                  // Begin Batch (Bind Texture)
-            batch.drawSprite(textureSize / 2, height - (textureSize / 2), textureSize, textureSize, textureRgn);  // Draw
-            batch.endBatch();                               // End Batch
+        public void DrawTexture(int width, int height) {
+            batch.BeginBatch(textureId);                  // Begin Batch (Bind Texture)
+            batch.DrawSprite(textureSize / 2, height - (textureSize / 2), textureSize, textureSize, textureRgn);  // Draw
+            batch.EndBatch();                               // End Batch
         }
     }
 }

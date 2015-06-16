@@ -48,7 +48,7 @@ namespace Texample
                 indices[i + 4] = (short)(j + 3);           // Calculate Index 4
                 indices[i + 5] = (short)(j + 0);           // Calculate Index 5
             }
-            vertices.setIndices(indices, 0, len);         // Set Index Buffer for Rendering
+            vertices.SetIndices(indices, 0, len);         // Set Index Buffer for Rendering
         }
 
         //--Begin Batch--//
@@ -56,12 +56,12 @@ namespace Texample
         //    NOTE: the overloaded (non-texture) version assumes that the texture is already bound!
         // A: textureId - the ID of the texture to use for the batch
         // R: [none]
-        public void beginBatch(int textureId) {
+        public void BeginBatch(int textureId) {
             GL.BindTexture(All.Texture2D, textureId);  // Bind the Texture
             numSprites = 0;                                 // Empty Sprite Counter
             bufferIndex = 0;                                // Reset Buffer Index (Empty)
         }
-        public void beginBatch() {
+        public void BeginBatch() {
             numSprites = 0;                                 // Empty Sprite Counter
             bufferIndex = 0;                                // Reset Buffer Index (Empty)
         }
@@ -70,12 +70,12 @@ namespace Texample
         // D: signal the end of a batch. render the batched sprites
         // A: [none]
         // R: [none]
-        public void endBatch() {
+        public void EndBatch() {
             if (numSprites > 0) {                        // IF Any Sprites to Render
-                vertices.setVertices(vertexBuffer, 0, bufferIndex);  // Set Vertices from Buffer
-                vertices.bind();                             // Bind Vertices
-                vertices.draw(All.Triangles, 0, numSprites * INDICES_PER_SPRITE);  // Render Batched Sprites
-                vertices.unbind();                           // Unbind Vertices
+                vertices.SetVertices(vertexBuffer, 0, bufferIndex);  // Set Vertices from Buffer
+                vertices.Bind();                             // Bind Vertices
+                vertices.Draw(All.Triangles, 0, numSprites * INDICES_PER_SPRITE);  // Render Batched Sprites
+                vertices.Unbind();                           // Unbind Vertices
             }
         }
 
@@ -88,9 +88,9 @@ namespace Texample
         //    width, height - the width and height of the sprite
         //    region - the texture region to use for sprite
         // R: [none]
-        public void drawSprite(float x, float y, float width, float height, TextureRegion region) {
+        public void DrawSprite(float x, float y, float width, float height, TextureRegion region) {
             if (numSprites == maxSprites) {              // IF Sprite Buffer is Full
-                endBatch();                                  // End Batch
+                EndBatch();                                  // End Batch
                                                              // NOTE: leave current texture bound!!
                 numSprites = 0;                              // Empty Sprite Counter
                 bufferIndex = 0;                             // Reset Buffer Index (Empty)

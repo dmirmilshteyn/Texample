@@ -44,7 +44,7 @@ namespace Texample
 
             // Load the font from file (set size + padding), creates the texture
             // NOTE: after a successful call to this the font is ready for rendering!
-            glText.load("Roboto-Regular.ttf", 14, 2, 2);  // Create Font (Height: 14 Pixels / X+Y Padding 2 Pixels)
+            glText.Load("Roboto-Regular.ttf", 14, 2, 2);  // Create Font (Height: 14 Pixels / X+Y Padding 2 Pixels)
 
             // Run the render loop
             Run();
@@ -104,19 +104,19 @@ namespace Texample
 
             // TEST: render the entire font texture
             GL.Color4(1.0f, 1.0f, 1.0f, 1.0f);         // Set Color to Use
-            glText.drawTexture(this.Width, this.Height);            // Draw the Entire Texture
+            glText.DrawTexture(this.Width, this.Height);            // Draw the Entire Texture
 
             // TEST: render some strings with the font
-            glText.begin(1.0f, 1.0f, 1.0f, 1.0f);         // Begin Text Rendering (Set Color WHITE)
-            glText.draw("Test String :)", 0, 0);          // Draw Test String
-            glText.draw("Line 1", 50, 50);                // Draw Test String
-            glText.draw("Line 2", 100, 100);              // Draw Test String
-            glText.end();                                   // End Text Rendering
+            glText.Begin(1.0f, 1.0f, 1.0f, 1.0f);         // Begin Text Rendering (Set Color WHITE)
+            glText.Draw("Test String :)", 0, 0);          // Draw Test String
+            glText.Draw("Line 1", 50, 50);                // Draw Test String
+            glText.Draw("Line 2", 100, 100);              // Draw Test String
+            glText.End();                                   // End Text Rendering
 
-            glText.begin(0.0f, 0.0f, 1.0f, 1.0f);         // Begin Text Rendering (Set Color BLUE)
-            glText.draw("More Lines...", 50, 150);        // Draw Test String
-            glText.draw("The End.", 50, 150 + glText.getCharHeight());  // Draw Test String
-            glText.end();                                   // End Text Rendering
+            glText.Begin(0.0f, 0.0f, 1.0f, 1.0f);         // Begin Text Rendering (Set Color BLUE)
+            glText.Draw("More Lines...", 50, 150);        // Draw Test String
+            glText.Draw("The End.", 50, 150 + glText.GetCharHeight());  // Draw Test String
+            glText.End();                                   // End Text Rendering
 
             // disable texture + alpha
             GL.Disable(All.Blend);                  // Disable Alpha Blend

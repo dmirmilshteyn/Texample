@@ -82,7 +82,7 @@ namespace Texample
         //    length - number of floats in the vertex array (total)
         //             for easy setting use: vtx_cnt * (this.vertexSize / 4)
         // R: [none]
-        public void setVertices(float[] vertices, int offset, int length) {
+        public void SetVertices(float[] vertices, int offset, int length) {
             Array.Clear(this.vertices, 0, this.vertices.Length);          // Remove Existing Vertices
             Array.Copy(vertices, offset, this.vertices, 0, length); // Set New Vertices
             this.numVertices = length / this.vertexStride;  // Save Number of Vertices
@@ -94,7 +94,7 @@ namespace Texample
         //    offset - offset to first index in array
         //    length - number of indices in array (from offset)
         // R: [none]
-        public void setIndices(short[] indices, int offset, int length) {
+        public void SetIndices(short[] indices, int offset, int length) {
             Array.Clear(this.indices, 0, this.indices.Length);          // Clear Existing Indices
             Array.Copy(indices, offset, this.indices, 0, length); // Set New Indices
             this.numIndices = length;                       // Save Number of Indices
@@ -105,7 +105,7 @@ namespace Texample
         //    USAGE: call once before calling draw() multiple times for this buffer.
         // A: [none]
         // R: [none]
-        public void bind() {
+        public void Bind() {
             GL.EnableClientState(All.VertexArray); // Enable Position in Vertices
             GL.VertexPointer(positionCnt, All.Float, vertexSize, vertices);  // Set Vertex Pointer
 
@@ -156,7 +156,7 @@ namespace Texample
         //    offset - the offset in the vertex/index buffer to start at
         //    numVertices - the number of vertices (indices) to draw
         // R: [none]
-        public void draw(All primitiveType, int offset, int numVertices) {
+        public void Draw(All primitiveType, int offset, int numVertices) {
             if (indices != null) {                       // IF Indices Exist
                 // Unsafe block to avoid creating copies of the array to allow usage of gl function without specifying an offset
                 unsafe
@@ -177,7 +177,7 @@ namespace Texample
         //    USAGE: call once before calling draw() multiple times for this buffer.
         // A: [none]
         // R: [none]
-        public void unbind() {
+        public void Unbind() {
             GL.DisableClientState(All.VertexArray);  // Clear Vertex Array State
 
             if (hasColor)                                 // IF Vertices Have Color
@@ -197,10 +197,10 @@ namespace Texample
         //    offset - the offset in the vertex/index buffer to start at
         //    numVertices - the number of vertices (indices) to draw
         // R: [none]
-        public void drawFull(All primitiveType, int offset, int numVertices) {
-            bind();
-            draw(primitiveType, offset, numVertices);
-            unbind();
+        public void DrawFull(All primitiveType, int offset, int numVertices) {
+            Bind();
+            Draw(primitiveType, offset, numVertices);
+            Unbind();
         }
 
         //--Set Vertex Elements--//
@@ -212,40 +212,40 @@ namespace Texample
         //    u, v - the u,v texture coords to set in buffer
         //    nx, ny, nz - the x,y,z normal to set in buffer
         // R: [none]
-        void setVtxPosition(int vtxIdx, float x, float y) {
+        void SetVtxPosition(int vtxIdx, float x, float y) {
             int index = vtxIdx * vertexStride;              // Calculate Actual Index
             vertices[index + 0] = x;                        // Set X
             vertices[index + 1] = y;                        // Set Y
         }
-        void setVtxPosition(int vtxIdx, float x, float y, float z) {
+        void SetVtxPosition(int vtxIdx, float x, float y, float z) {
             int index = vtxIdx * vertexStride;              // Calculate Actual Index
             vertices[index + 0] = x;                        // Set X
             vertices[index + 1] = y;                        // Set Y
             vertices[index + 2] = z;                        // Set Z
         }
-        void setVtxColor(int vtxIdx, float r, float g, float b, float a) {
+        void SetVtxColor(int vtxIdx, float r, float g, float b, float a) {
             int index = (vtxIdx * vertexStride) + positionCnt;  // Calculate Actual Index
             vertices[index + 0] = r;  // Set Red
             vertices[index + 1] = g;  // Set Green
             vertices[index + 2] = b;  // Set Blue
             vertices[index + 3] = a;  // Set Alpha
         }
-        void setVtxColor(int vtxIdx, float r, float g, float b) {
+        void SetVtxColor(int vtxIdx, float r, float g, float b) {
             int index = (vtxIdx * vertexStride) + positionCnt;  // Calculate Actual Index
             vertices[index + 0] = r;  // Set Red
             vertices[index + 1] = g;  // Set Green
             vertices[index + 2] = b;  // Set Blue
         }
-        void setVtxColor(int vtxIdx, float a) {
+        void SetVtxColor(int vtxIdx, float a) {
             int index = (vtxIdx * vertexStride) + positionCnt;  // Calculate Actual Index
             vertices[index + 3] = a;  // Set Alpha
         }
-        void setVtxTexCoords(int vtxIdx, float u, float v) {
+        void SetVtxTexCoords(int vtxIdx, float u, float v) {
             int index = (vtxIdx * vertexStride) + positionCnt + (hasColor ? COLOR_CNT : 0);  // Calculate Actual Index
             vertices[index + 0] = u;  // Set U
             vertices[index + 1] = v;  // Set V
         }
-        void setVtxNormal(int vtxIdx, float x, float y, float z) {
+        void SetVtxNormal(int vtxIdx, float x, float y, float z) {
             int index = (vtxIdx * vertexStride) + positionCnt + (hasColor ? COLOR_CNT : 0) + (hasTexCoords ? TEXCOORD_CNT : 0);  // Calculate Actual Index
             vertices[index + 0] = x;                        // Set X
             vertices[index + 1] = y;                        // Set Y
